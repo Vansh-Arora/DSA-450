@@ -1,18 +1,15 @@
-# Optimized recursion
-def max_min(A, beg, end):
-    if beg == end:
-        return [A[beg],A[end]]
-    if beg == end - 1:
-        if A[beg] >= A[end]:
-            return [A[beg],A[end]]
-        else:
-            return [A[end],A[beg]]
-
-
-    # Recursive Approach
-    mid = (beg + end)//2
-    MM_1 = max_min(A,beg,mid-1)
-    MM_2 = max_min(A,mid,end)
-    # Self Work 
-    return [max(MM_1[0], MM_2[0]), min(MM_1[1], MM_2[1])]
-print(max_min([1,2,3,4],0,3))
+def generate(str,sub, ans):
+    ## Base case
+    # if number of rows becomes equal to words in my answer then print
+    if len(ans) == len(str):
+        print(ans)
+        return
+    if sub >= len(str):
+        return
+    for i in str[sub]:
+        ans.append(i)
+        generate(str,sub+1,ans)
+        ans.pop()
+    
+inp = [["you", "we"],["have", "are"],["sleep", "eat", "drink"]]
+generate(inp,0,[])
